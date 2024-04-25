@@ -1,4 +1,5 @@
 # Website name: JudenCraft
+# Website category: Jute and wooden Craft
 # Live site: 
 # Features:
 * Responsive for All devices(Mobile, Tablet, Laptop)
