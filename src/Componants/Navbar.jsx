@@ -3,16 +3,16 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div>
-      <nav className="flex items-center justify-between px-4 py-2 my-3">
-        <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 text-xl font-semibold transition-all duration-200 hover:scale-110">
-          <h2 className="font-montserrat text-3xl flex gap-4 items-center">
-            <img src="/bag.png" className="size-10" alt="" />{" "}
-            <span>JudenCraft</span>
-          </h2>
-        </div>
-        <div className="flex items-center justify-between gap-16">
-          <div className="flex items-center justify-between gap-10">
+    <div className="">
+      <nav className="flex items-center justify-between px-4 py-2 my-3 w-11/12 mx-auto max-w-[1440px]">
+        <div className="flex items-center justify-between w-full">
+          <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 text-xl font-semibold transition-all duration-200 hover:scale-110">
+            <h2 className="font-montserrat text-3xl flex gap-4 items-center">
+              <img src="/bag.png" className="size-10" alt="" />{" "}
+              <span>JudenCraft</span>
+            </h2>
+          </div>
+          <div className="flex items-center justify-between gap-8">
             {/* navlink 1 */}
             <NavLink
               to="/"
