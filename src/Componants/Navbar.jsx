@@ -98,7 +98,7 @@ const Navbar = () => {
                 className="bg-gray-100 w-[18rem] py-4 px-11 border rounded-full text-black/80 text-xs"
                 placeholder="Search for products"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-[50%] rounded-full bg-yellow-500 px-6 py-2.5 text-xs font-bold text-black duration-300 active:scale-95 uppercase font-montserrat">
+              <button className="absolute right-2 top-1/2 -translate-y-[50%] rounded-full bg-yellow-500 px-6 py-2.5 text-xs font-bold text-black duration-300 active:scale-95 uppercase font-poppins">
                 Search
               </button>
             </div>
