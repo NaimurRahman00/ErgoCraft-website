@@ -4,11 +4,19 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import 'swiper/css/pagination';
 
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import { useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
+
+const pagination = {
+  clickable: true,
+  renderBullet: function (index, className) {
+    return '<span class="' + className + '">' + (index + 1) + "</span>";
+  },
+};
 
 const CraftItem = () => {
   const isSmallScreen = window.innerWidth <= 600;
@@ -36,13 +44,11 @@ const CraftItem = () => {
         </div>
         <div className="col-span-9">
           <Swiper
-            navigation={true}
-            modules={[Navigation]}
-            direction={"horizontal"}
+            modules={[Pagination]}
             slidesPerView={isSmallScreen ? 1 : isMedScreen ? 2 : 3}
             spaceBetween={10}
             mousewheel={isSmallScreen ? false : true}
-            pagination={{
+            pagination={ {pagination,
               clickable: true,
               dynamicBullets: true,
             }}
