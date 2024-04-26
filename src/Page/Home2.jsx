@@ -1,6 +1,7 @@
 
 import Banner from '../Componants/Banner';
 import CraftItem from '../Componants/CraftItem';
+import Discover from '../Componants/Discover';
 import Testimonials from '../Componants/Testimonials';
 
 const Home2 = () => {
@@ -9,6 +10,7 @@ const Home2 = () => {
             <Banner></Banner>
             <CraftItem></CraftItem>
             <Testimonials></Testimonials>
+            <Discover></Discover>
         </div>
     );
 };
