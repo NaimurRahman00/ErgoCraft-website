@@ -3,7 +3,7 @@ import { FaFacebookF, FaInstagram, FaPinterestP } from "react-icons/fa";
 const Discover = () => {
   return (
     <div>
-      <div className="w-[90%] mx-auto max-w-[1440px]">
+      <div className="w-[90%] mx-auto max-w-[1440px] pb-6">
         <h2 className="text-[4.5rem] font-medium font-unbounded text-center uppercase">
           Discover
         </h2>
