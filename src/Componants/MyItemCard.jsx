@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MyItemCard = () => {
   // Color and size array
@@ -18,7 +19,7 @@ const MyItemCard = () => {
   const [selectedSize, setSelectedSize] = useState("m");
   return (
     <div>
-      <div className="bg-card mx-auto w-full max-w-md rounded-lg  bg-white shadow-lg shadow-black/30">
+      <div className="bg-card mx-auto w-full max-w-md rounded-lg bg-white shadow-lg shadow-black/30">
         {/* Product Title */}
         <div className="flex flex-col space-y-1.5 px-6 pt-6">
           <h3 className="text-2xl font-semibold ">Classic Leather Jacket</h3>
@@ -97,10 +98,17 @@ const MyItemCard = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center p-6">
-          <button className="w-full rounded-lg bg-slate-800 px-6 py-2 text-[12px] font-semibold text-white hover:bg-slate-900 sm:text-sm md:text-base">
-            Add to Cart
-          </button>
+        <div className="flex items-center p-6 gap-4">
+          <Link to="/update">
+            <button className="w-full rounded-lg bg-emerald-600 px-6 py-2 text-[12px] font-semibold text-white hover:bg-emerald-700 sm:text-sm md:text-base">
+              Update
+            </button>
+          </Link>
+          <Link to="/delete">
+            <button className="w-full rounded-lg bg-red-600 px-6 py-2 text-[12px] font-semibold text-white hover:bg-red-700 sm:text-sm md:text-base">
+              Delete
+            </button>
+          </Link>
         </div>
       </div>
     </div>
