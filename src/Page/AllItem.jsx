@@ -8,7 +8,10 @@ const AllItem = () => {
   };
   return (
     <div  style={bgImg} className="">
-      <div className="overflow-x-auto py-20 w-11/12 mx-auto max-w-[1440px]">
+      <div className="overflow-x-auto py-10 w-11/12 mx-auto max-w-[1440px]">
+      <h2 className="text-center text-5xl font-unbounded font-semibold py-2">
+          All items list
+        </h2>
         <table className="min-w-[90%] rounded-xl overflow-hidden shadow-md border mx-auto border-gray-100 my-6 bg-white">
           <thead className="">
             <tr className="bg-yellow-500/20 text-black">
