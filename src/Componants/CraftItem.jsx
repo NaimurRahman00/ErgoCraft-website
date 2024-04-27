@@ -4,12 +4,13 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import 'swiper/css/pagination';
+import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper/modules";
 import { useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const pagination = {
   clickable: true,
@@ -48,10 +49,7 @@ const CraftItem = () => {
             slidesPerView={isSmallScreen ? 1 : isMedScreen ? 2 : 3}
             spaceBetween={10}
             mousewheel={isSmallScreen ? false : true}
-            pagination={ {pagination,
-              clickable: true,
-              dynamicBullets: true,
-            }}
+            pagination={{ pagination, clickable: true, dynamicBullets: true }}
             className="mySwiper cursor-pointer bg-transparent"
           >
             {cardData.map((slide, inx) => (
@@ -116,9 +114,11 @@ const CraftItem = () => {
                   </div>
                   <div className="flex gap-4 justify-between items-center">
                     <div className="text-xl font-bold">$ 699</div>
-                    <button className="btm rounded-full border-2 border-yellow-500 text-yellow-500 font-bold px-4 hover:text-slate-800 dark:hover:bg-white  py-2  duration-300 hover:bg-gray-200 mr-5">
-                      View Details
-                    </button>
+                    <Link to="/viewDetais">
+                      <button className="btm rounded-full border-2 border-yellow-500 text-yellow-500 font-bold px-4 hover:text-slate-800 dark:hover:bg-white  py-2  duration-300 hover:bg-gray-200 mr-5">
+                        View Details
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </SwiperSlide>

@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./Page/Home.jsx";
 import Home2 from "./Page/Home2.jsx";
+import ViewDetails from "./Page/ViewDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/myList",
         element: <MyList></MyList>,
+      },
+      {
+        path: "/viewDetais",
+        element: <ViewDetails></ViewDetails>
       },
     ],
   },
