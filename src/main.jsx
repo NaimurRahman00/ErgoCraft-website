@@ -10,6 +10,7 @@ import "./index.css";
 import Home from "./Page/Home.jsx";
 import Home2 from "./Page/Home2.jsx";
 import ViewDetails from "./Page/ViewDetails.jsx";
+import NotFound from "./Page/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register></Register>,
+  },
+  {
+    path: "*",
+    element: <NotFound></NotFound>,
+    loader: () => fetch("/notFound.json"),
   },
 ]);
 
