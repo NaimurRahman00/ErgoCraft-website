@@ -1,17 +1,25 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Componants/Navbar";
+import Footer from "../Componants/Footer";
 import { useState } from "react";
 // import Footer from "../Componants/Footer";
 
 const Login = () => {
+  // style
+  const bgImg = {
+    backgroundImage: 'url("/public/register-bg.jpg")',
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+  };
+
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="max-w-[2160px] mx-auto ">
-      <div className="relative h-[100vh] flex justify-center items-center">
-        <div className="absolute top-0 left-0 right-0">
+    <div style={bgImg} className="relative">
+      <div className="max-w-[2160px] mx-auto relative pb-[35rem] flex justify-center items-center">
+        <div className="absolute top-0 left-0 right-0 z-10">
           <Navbar></Navbar>
         </div>
-        <div className="flex justify-center items-end mt-[5%]">
+        <div className="flex justify-center items-end mt-[5%] z-10">
           <img className="size-[40em]" src="/login-bg.png" alt="" />
           {/* Form side */}
           <div className="w-full p-10 space-y-3 rounded-[2.4rem] bg-white shadow-2xl shadow-black/15 font-sans mx-16 border">
@@ -123,15 +131,11 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <img
-          src="/register-bg.jpg"
-          alt=""
-          className="absolute left-0 right-0 -top-52 -z-10 opacity-50"
-        />
       </div>
-      {/* <div className="mt-40 bg-black">
+      <div className="bg-neutral-100 absolute bottom-0 z-10 right-0 left-0">
         <Footer></Footer>
-      </div> */}
+      </div>
+      <div className="bg-white/85 absolute top-0 right-0 left-0 bottom-0"></div>
     </div>
   );
 };
