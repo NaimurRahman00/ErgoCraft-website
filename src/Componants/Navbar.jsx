@@ -79,7 +79,7 @@ const Navbar = () => {
                   : "group flex font-semibold cursor-pointer flex-col"
               }
             >
-              My List{" "}
+              My Items{" "}
               <NavLink
                 to="/myList"
                 className={({ isActive }) =>

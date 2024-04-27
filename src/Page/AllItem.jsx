@@ -3,13 +3,13 @@ const AllItem = () => {
 
   const bgImg = {
     backgroundImage: 'url("/public/register-bg.jpg")',
-    backgroundSize: "cover", 
+    backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   };
   return (
-    <div  style={bgImg} className="">
+    <div style={bgImg} className="">
       <div className="overflow-x-auto py-10 w-11/12 mx-auto max-w-[1440px]">
-      <h2 className="text-center text-5xl font-unbounded font-semibold py-2">
+        <h2 className="text-center text-5xl font-unbounded font-semibold py-2">
           All items list
         </h2>
         <table className="min-w-[90%] rounded-xl overflow-hidden shadow-md border mx-auto border-gray-100 my-6 bg-white">
@@ -45,9 +45,7 @@ const AllItem = () => {
                 <td className="py-4 px-6 border-b text-lg font-medium">
                   $99.99
                 </td>
-                <td className="py-4 px-6 border-b text-lg font-medium">
-                  Wood
-                </td>
+                <td className="py-4 px-6 border-b text-lg font-medium">Wood</td>
                 <td className="py-4 px-6 border-b text-end">
                   <button className="bg-yellow-500 hover:scale-110 scale-100 transition-all duration-100 text-black font-semibold py-2 px-4 rounded-md">
                     Details
