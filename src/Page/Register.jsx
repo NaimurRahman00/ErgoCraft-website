@@ -1,16 +1,51 @@
-import { Link } from "react-router-dom";
 import Navbar from "../Componants/Navbar";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import Footer from "../Componants/Footer";
+import { ContextData } from "../Providers/AuthProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
+  const { register, notify } = useContext(ContextData);
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Dynamic title
+  // useEffect(() => {
+  //   document.title = "Berao | Register";
+  // }, []);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const email = form.get("email");
+    const password = form.get("password");
+    const name = form.get("name");
+    const photoUrl = form.get("photoUrl");
+
+    if (!/^.{6,}$/.test(password)) {
+      return notify("Password length must minimum 6 letter!");
+    }
+    if (!/^(?=.*[A-Z]).+$/.test(password)) {
+      return notify("Password must have an Uppercase letter!");
+    }
+    if (!/^(?=.*[a-z]).+$/.test(password)) {
+      return notify("Password must have a Lowercase letter!");
+    }
+
+    register(email, password, name, photoUrl);
+
+    // navigate after login
+    navigate(location?.state ? location.state : "/");
+  };
+
   // style
   const bgImg = {
     backgroundImage: 'url("/public/register-bg.jpg")',
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    backgroundPosition: "top center",
   };
 
   return (
@@ -29,30 +64,32 @@ const Register = () => {
               Welcome to ErgoCraft, Enter your details to get register
             </p>
             {/* Input fields and the form started */}
-            <form className="space-y-3 mt-8">
+            <form onSubmit={handleRegister} className="space-y-3 mt-8">
               <div className="space-y-2 text-sm">
                 <input
                   type="text"
                   name="name"
-                  id="username"
+                  id="name"
                   placeholder="Enter your name"
                   className="w-full px-4 py-3 rounded-md border border-yellow-800/30 focus:outline-none focus:ring"
+                  required
+                />
+              </div>
+              <div className="space-y-2 text-sm">
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-3 rounded-md border border-yellow-800/30 focus:outline-none focus:ring"
+                  required
                 />
               </div>
               <div className="space-y-2 text-sm">
                 <input
                   type="text"
                   name="photoUrl"
-                  id="username"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-md border border-yellow-800/30 focus:outline-none focus:ring"
-                />
-              </div>
-              <div className="space-y-2 text-sm">
-                <input
-                  type="password"
-                  name="username"
-                  id="username"
+                  id="photo"
                   placeholder="Photo URL"
                   className="w-full px-4 py-3 rounded-md border border-yellow-800/30 focus:outline-none focus:ring"
                 />
@@ -108,6 +145,7 @@ const Register = () => {
         <Footer></Footer>
       </div>
       <div className="bg-white/50 absolute top-0 right-0 left-0 bottom-0"></div>
+      <ToastContainer className="z-20"></ToastContainer>
     </div>
   );
 };

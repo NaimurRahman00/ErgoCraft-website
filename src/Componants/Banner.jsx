@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const Banner = () => {
   const [currentSlider, setCurrentSlider] = useState(0);
+  
   const sliders = [
     "https://i.ibb.co/svwWHhs/jute-bag.jpg",
     "https://i.ibb.co/hyFHfk4/wood-spoon.jpg",

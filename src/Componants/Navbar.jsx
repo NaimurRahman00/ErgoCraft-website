@@ -1,7 +1,32 @@
+import { useContext, useEffect, useRef, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
+// import { AuthContext } from "../Providers/AuthProvider";
+import { LuShoppingCart } from "react-icons/lu";
+import { ContextData } from "../Providers/AuthProvider";
 
 const Navbar = () => {
+  const { currentUser, userPhoto, userName, loading } =
+    useContext(ContextData);
+  console.log(userPhoto, userName);
+
+  // Profile
+  const [open, setOpen] = useState(false);
+  const dropDownRef = useRef(null);
+  const items = ["Profile", "Dashboard", "Settings", "Log Out"];
+
+  useEffect(() => {
+    const close = (e) => {
+      if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", close);
+    return () => {
+      document.removeEventListener("mousedown", close);
+    };
+  }, []);
+
   return (
     <div className="">
       <nav className="flex items-center justify-between px-4 py-5 w-11/12 mx-auto max-w-[1440px]">
@@ -102,16 +127,78 @@ const Navbar = () => {
                 Search
               </button>
             </div>
-            <Link to="/login">
-              <button className="rounded-full bg-transparent border-2 border-yellow-500 px-6 py-2 text-yellow-500 font-bold transition-all duration-300 hover:scale-90">
-                Log In
-              </button>
-            </Link>
-            <Link to="/register">
-              <button className="rounded-full bg-transparent border-2 border-yellow-500 px-6 py-2 text-yellow-500 font-bold transition-all duration-300 hover:scale-90">
-                Register
-              </button>
-            </Link>
+            {loading ? (
+              <p>haha</p>
+            ) : (
+              <div>
+                {currentUser ? (
+                  <div className="flex gap-3 items-center justify-center">
+                    <button className="rounded-full bg-slate-100 p-[16px] text-xl text-black font-bold transition-all duration-300 hover:scale-90">
+                      <LuShoppingCart />
+                    </button>
+                    <div
+                      ref={dropDownRef}
+                      className="relative mx-auto w-fit rounded-full bg-slate-100 text-xl text-black font-bold"
+                    >
+                      <button onClick={() => setOpen((prev) => !prev)}>
+                        <div className="pointer group relative h-10">
+                          {/* Hover button */}
+                          <button className="inline">
+                            <img
+                              width={60}
+                              height={60}
+                              className="w-[52px] rounded-full bg-slate-500 object-cover duration-500 hover:scale-x-[98%] hover:opacity-80"
+                              src={currentUser?.photoURL || userPhoto}
+                              alt="avatar drop down navigate ui"
+                            />
+                          </button>
+                          {/* Hover Text */}
+                          <div className="absolute -left-[200px] top-0 flex cursor-pointer whitespace-nowrap opacity-0 duration-500 hover:hidden group-hover:-left-[220px] group-hover:opacity-100">
+                            <p className="h-fit rounded-md bg-[#0EA5E9] px-3 py-2 text-white shadow-[0px_0px_10px_0px_#0EA5E9]">
+                              {userName}
+                            </p>
+                            <span className="absolute -right-2 top-[50%] h-0 w-0 -translate-y-1/2 rotate-45 border-b-[20px] border-r-[20px] border-b-transparent border-r-[#0EA5E9] shadow-[0px_0px_10px_0px_#0EA5E9]"></span>
+                          </div>
+                        </div>
+                      </button>
+                      <ul
+                        className={`${
+                          open ? "visible duration-300" : "invisible"
+                        } absolute right-0 top-12 z-50 w-fit text-base rounded-sm bg-slate-200 shadow-md`}
+                      >
+                        {items.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className={`rounded-sm px-6 py-2 ${
+                              open ? "opacity-100 duration-300" : "opacity-0"
+                            }  ${
+                              item === "Log Out"
+                                ? "text-red-500 hover:bg-red-600 hover:text-white"
+                                : "hover:bg-slate-300"
+                            }`}
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex gap-4">
+                    <Link to="/login">
+                      <button className="rounded-full bg-transparent border-2 border-yellow-500 px-6 py-2 text-yellow-500 font-bold transition-all duration-300 hover:scale-90">
+                        Log In
+                      </button>
+                    </Link>
+                    <Link to="/register">
+                      <button className="rounded-full bg-transparent border-2 border-yellow-500 px-6 py-2 text-yellow-500 font-bold transition-all duration-300 hover:scale-90">
+                        Register
+                      </button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </nav>

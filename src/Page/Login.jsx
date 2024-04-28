@@ -1,15 +1,78 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Componants/Navbar";
 import Footer from "../Componants/Footer";
-import { useState } from "react";
-// import Footer from "../Componants/Footer";
+import { useContext, useState } from "react";
+import { ContextData } from "../Providers/AuthProvider";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth/cordova";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import auth from "../Firebase/firebase.init";
 
 const Login = () => {
+  const { login } = useContext(ContextData);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { success, notify } = useContext(ContextData);
+
   // style
   const bgImg = {
     backgroundImage: 'url("/public/register-bg.jpg")',
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
+  };
+
+
+  // Google auth
+  const googleProvider = new GoogleAuthProvider();
+
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, googleProvider)
+      .then(() => {
+        // navigate after login
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+  };
+
+  //  Github auth
+  const githubProvider = new GithubAuthProvider();
+
+  const handleGithubSignIn = () => {
+    signInWithPopup(auth, githubProvider)
+      .then(() => {
+        // navigate after login
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+  };
+
+  // Dynamic title
+  // useEffect(() => {
+  //   document.title = "Berao | Log In";
+  // }, []);
+
+  // form
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const email = form.get("email");
+    const password = form.get("password");
+    login(email, password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        if (result) {
+          success("Login successful!");
+        }
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        if (error) {
+          notify("Invalid email or password!");
+        }
+      });
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -30,11 +93,11 @@ const Login = () => {
               Hey, Enter your details to get sign in to your account
             </p>
             {/* Input fields and the form started */}
-            <form className="space-y-3 mt-8">
+            <form onSubmit={handleLogin} className="space-y-3 mt-8">
               <div className="space-y-2 text-sm">
                 <input
-                  type="text"
-                  name="name"
+                  type="email"
+                  name="email"
                   id="username"
                   placeholder="Enter Email"
                   className="w-full px-4 py-3 rounded-md border border-yellow-800/30 focus:outline-none focus:ring"
@@ -80,6 +143,7 @@ const Login = () => {
             {/* Social icons */}
             <div className="flex justify-center gap-1">
               <button
+              onClick={handleGoogleSignIn}
                 aria-label="Log in with Google"
                 className="px-3 py-2 rounded-md hover:bg-gray-200 flex justify-center items-center gap-2 border border-yellow-700/40"
               >
@@ -93,19 +157,7 @@ const Login = () => {
                 <p className="font-bold text-xl">Google</p>
               </button>
               <button
-                aria-label="Log in with Twitter"
-                className="px-3 py-2 rounded-md hover:bg-gray-200 flex justify-center items-center gap-2 border border-yellow-700/40"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  className="w-6 h-6 fill-current"
-                >
-                  <path d="M21.95 5.005l-3.306-.004c-3.206 0-5.277 2.124-5.277 5.415v2.495H10.05v4.515h3.317l-.004 9.575h4.641l.004-9.575h3.806l-.003-4.514h-3.803v-2.117c0-1.018.241-1.533 1.566-1.533l2.366-.001.01-4.256z"></path>
-                </svg>
-                <p className="font-bold text-xl">Facebook</p>
-              </button>
-              <button
+              onClick={handleGithubSignIn}
                 aria-label="Log in with GitHub"
                 className="px-3 py-2 rounded-md hover:bg-gray-200 flex justify-center items-center gap-2 border border-yellow-700/40"
               >

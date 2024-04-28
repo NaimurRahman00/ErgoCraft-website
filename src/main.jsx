@@ -11,6 +11,7 @@ import Home from "./Page/Home.jsx";
 import Home2 from "./Page/Home2.jsx";
 import ViewDetails from "./Page/ViewDetails.jsx";
 import NotFound from "./Page/NotFound.jsx";
+import AuthProvider from "./Providers/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/viewDetais",
-        element: <ViewDetails></ViewDetails>
+        element: <ViewDetails></ViewDetails>,
       },
     ],
   },
@@ -65,6 +66,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
