@@ -1,5 +1,10 @@
+import { useContext } from "react";
+import { ContextData } from "../Providers/AuthProvider";
 
 const AddItem = () => {
+  const { success } = useContext(ContextData);
+
+
   const bgImg = {
     backgroundImage: 'url("/public/register-bg.jpg")',
     backgroundSize: "cover", 
@@ -24,9 +29,25 @@ const AddItem = () => {
     const userName = form.user_name.value;
     const email = form.email.value;
 
-    const data = {name, subName, image, price, time, rating, description, stock, customizable, userName, email}
+    const newData = {name, subName, image, price, time, rating, description, stock, customizable, userName, email}
 
-    console.log(data)
+    console.log(newData)
+
+    // send data to the server 
+    fetch("http://localhost:5000/craft", {
+      method: "POST",
+      headers: {
+        "content-type": 'application/json'
+      },
+      body: JSON.stringify(newData)
+    })
+    .then(res => {
+      res.json()
+      success('Craft item added successfully!')
+    })
+    .then(data => {
+      console.log(data)
+    })
   }
   return (
     <div style={bgImg}>
@@ -184,7 +205,7 @@ const AddItem = () => {
               />
               <label
                 className="absolute -top-2 left-[10px] rounded-md px-2 text-xs text-black duration-300 peer-placeholder-shown:left-[14px] peer-placeholder-shown:top-3  peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:left-[10px] peer-focus:bg-sky-300 peer-focus:text-xs peer-focus:text-sky-800 dark:peer-focus:text-black font-semibold dark:peer-focus:bg-yellow-500"
-                htmlFor="name"
+                htmlFor="customizable"
               >
                 Is this Customizable?
               </label>
