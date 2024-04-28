@@ -35,6 +35,7 @@ const router = createBrowserRouter([
       {
         path: "/allItems",
         element: <AllItem></AllItem>,
+        loader: () => fetch('http://localhost:5000/craft')
       },
       {
         path: "/addItem",
