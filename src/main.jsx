@@ -21,6 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home2></Home2>,
+        loader: () => fetch('http://localhost:5000/craft')
         // loader: async () => {
         //   const [sliders, data] = await Promise.all([
         //     fetch("/sliders.json"),

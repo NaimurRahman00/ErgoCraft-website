@@ -19,12 +19,12 @@ const pagination = {
   },
 };
 
-const CraftItem = () => {
+const CraftItem = ({crafts}) => {
   const isSmallScreen = window.innerWidth <= 600;
   const isMedScreen = window.innerWidth <= 900;
-  const cardData = [1, 2, 3, 4, 5, 6];
+  const cardData = crafts;
 
-  //   Rating
+  // Rating
   const [userRating, setUserRating] = useState(4);
   return (
     <div className="w-11/12 mx-auto max-w-[1440px] my-20 py-10">
@@ -63,7 +63,7 @@ const CraftItem = () => {
                       width={200}
                       height={200}
                       className="size-[280px] rounded-2xl object-cover"
-                      src="https://source.unsplash.com/200x200/?bed"
+                      src={slide.image}
                       alt="card navigate ui"
                     />
                     <h3 className="absolute top-2 text-sm right-2 bg-black text-white px-3 py-1 rounded-full">
@@ -76,10 +76,9 @@ const CraftItem = () => {
                     </div>
                   </div>
                   <div className="grid gap-2">
-                    <h1 className="text-lg font-semibold ">Product Name</h1>
+                    <h1 className="text-lg font-semibold ">{slide.name}</h1>
                     <p className="text-sm text-black/50 font-medium">
-                      This is a brief description of the product. It highlights
-                      the key features and benefits.
+                      {slide.description.slice(0, 100)}...
                     </p>
                     <div className="text-lg font-semibold">
                       <div className="flex space-x-1">
@@ -113,7 +112,7 @@ const CraftItem = () => {
                     </div>
                   </div>
                   <div className="flex gap-4 justify-between items-center">
-                    <div className="text-xl font-bold">$ 699</div>
+                    <div className="text-xl font-bold">$ {slide.price}</div>
                     <Link to="/viewDetais">
                       <button className="btm rounded-full border-2 border-yellow-500 text-yellow-500 font-bold px-4 hover:text-slate-800 dark:hover:bg-white  py-2  duration-300 hover:bg-gray-200 mr-5">
                         View Details
