@@ -6,7 +6,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import { ContextData } from "../Providers/AuthProvider";
 
 const Navbar = () => {
-  const { currentUser, userPhoto, userName, loading } =
+  const { currentUser, userPhoto, userName, loading, logOut } =
     useContext(ContextData);
   console.log(userPhoto, userName);
 
@@ -26,6 +26,11 @@ const Navbar = () => {
       document.removeEventListener("mousedown", close);
     };
   }, []);
+
+  // Logout
+  const handleLogOut = () => {
+    logOut().then().catch();
+  };
 
   return (
     <div className="">
@@ -164,10 +169,10 @@ const Navbar = () => {
                       <ul
                         className={`${
                           open ? "visible duration-300" : "invisible"
-                        } absolute right-0 top-12 z-50 w-fit text-base rounded-sm bg-slate-200 shadow-md`}
+                        } absolute -right-8 top-14 z-50 w-fit text-base rounded-sm bg-slate-200 shadow-md`}
                       >
-                        {items.map((item, idx) => (
-                          <li
+                        {/* {items.map((item, idx) => (
+                          <li onClick={item === "Log Out" ? handleLogOut : ""}
                             key={idx}
                             className={`rounded-sm px-6 py-2 ${
                               open ? "opacity-100 duration-300" : "opacity-0"
@@ -179,7 +184,22 @@ const Navbar = () => {
                           >
                             {item}
                           </li>
-                        ))}
+                        ))} */}
+                        <li
+                          className={`rounded-sm px-6 w-40 py-2 text-black hover:bg-red-600 hover:text-white ${
+                            open ? "opacity-100 duration-300" : "opacity-0"
+                          }`}
+                        >
+                          Profile
+                        </li>
+                        <li 
+                        onClick={handleLogOut}
+                          className={`rounded-sm px-6 w-40 py-2 text-red-500 hover:bg-red-600 hover:text-white ${
+                            open ? "opacity-100 duration-300" : "opacity-0"
+                          }`}
+                        >
+                          Log Out
+                        </li>
                       </ul>
                     </div>
                   </div>

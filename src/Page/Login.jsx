@@ -4,14 +4,15 @@ import Footer from "../Componants/Footer";
 import { useContext, useState } from "react";
 import { ContextData } from "../Providers/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth/cordova";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import auth from "../Firebase/firebase.init";
+import { ToastContainer } from "react-toastify";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useContext(ContextData);
   const location = useLocation();
   const navigate = useNavigate();
-  const { success, notify } = useContext(ContextData);
 
   // style
   const bgImg = {
@@ -19,7 +20,6 @@ const Login = () => {
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   };
-
 
   // Google auth
   const googleProvider = new GoogleAuthProvider();
@@ -54,28 +54,26 @@ const Login = () => {
   //   document.title = "Berao | Log In";
   // }, []);
 
-  // form
+  // login
   const handleLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
-    login(email, password);
-    signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        if (result) {
-          success("Login successful!");
-        }
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((error) => {
-        if (error) {
-          notify("Invalid email or password!");
-        }
-      });
+    console.log(email, password)
+
+    login(email, password)
+      // .then((result) => {
+      //   console.log(result);
+      //   success("Login successful!");
+      //   navigate(location?.state ? location.state : "/");
+      // })
+      // .catch((error) => {
+      //   console.log(error)
+      //     notify("Invalid email or password!");
+      // });
   };
 
-  const [showPassword, setShowPassword] = useState(false);
   return (
     <div style={bgImg} className="relative">
       <div className="max-w-[2160px] mx-auto relative pb-[35rem] flex justify-center items-center">
@@ -143,7 +141,7 @@ const Login = () => {
             {/* Social icons */}
             <div className="flex justify-center gap-1">
               <button
-              onClick={handleGoogleSignIn}
+                onClick={handleGoogleSignIn}
                 aria-label="Log in with Google"
                 className="px-3 py-2 rounded-md hover:bg-gray-200 flex justify-center items-center gap-2 border border-yellow-700/40"
               >
@@ -157,7 +155,7 @@ const Login = () => {
                 <p className="font-bold text-xl">Google</p>
               </button>
               <button
-              onClick={handleGithubSignIn}
+                onClick={handleGithubSignIn}
                 aria-label="Log in with GitHub"
                 className="px-3 py-2 rounded-md hover:bg-gray-200 flex justify-center items-center gap-2 border border-yellow-700/40"
               >
@@ -188,6 +186,7 @@ const Login = () => {
         <Footer></Footer>
       </div>
       <div className="bg-white/85 absolute top-0 right-0 left-0 bottom-0"></div>
+      <ToastContainer className="z-20"></ToastContainer>
     </div>
   );
 };

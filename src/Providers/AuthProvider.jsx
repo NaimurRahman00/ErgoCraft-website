@@ -1,6 +1,7 @@
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
+    signInWithEmailAndPassword,
     signOut,
   } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
@@ -27,16 +28,27 @@ const AuthProvider = ({ children }) => {
         setUserPhoto(photoURL);
         setUserName(name);
         setUserEmail(email);
+        console.log(result.user)
       })
       .catch((error) => {
         if (error) {
           notify("Sorry! This email is already in use!");
         }
+        console.log(error.message)
       });
   };
   // Login with email
   const login = (email, password) => {
-    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+    .then((result) => {
+      console.log(result);
+      success("Login successful!");
+    })
+    .catch((error) => {
+      console.log(error)
+        notify("Invalid email or password!");
+    });
+    setLoading(false);
   };
 
   // Update profile
