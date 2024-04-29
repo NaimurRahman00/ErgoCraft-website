@@ -4,13 +4,11 @@ import { ContextData } from "../Providers/AuthProvider";
 const AddItem = () => {
   const { success } = useContext(ContextData);
 
-
   const bgImg = {
     backgroundImage: 'url("/public/register-bg.jpg")',
-    backgroundSize: "cover", 
+    backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   };
-
 
   // update data
   const handleAddNewItem = (e) => {
@@ -29,26 +27,37 @@ const AddItem = () => {
     const userName = form.user_name.value;
     const email = form.email.value;
 
-    const newData = {name, subName, image, price, time, rating, description, stock, customizable, userName, email}
+    const newData = {
+      name,
+      subName,
+      image,
+      price,
+      time,
+      rating,
+      description,
+      stock,
+      customizable,
+      userName,
+      email,
+    };
 
-    console.log(newData)
-
-    // send data to the server 
-    fetch("http://localhost:5000/craft", {
+    // send data to the server
+    fetch("https://ergocraft.vercel.app/craft", {
       method: "POST",
       headers: {
-        "content-type": 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(newData)
+      body: JSON.stringify(newData),
     })
-    .then(res => {
-      res.json()
-      success('Craft item added successfully!')
-    })
-    .then(data => {
-      console.log(data)
-    })
-  }
+      .then((res) => {
+        res.json();
+        success("Craft item added successfully!");
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div style={bgImg}>
       <div className="w-11/12 mx-auto max-w-[1440px] pt-6 pb-28">
@@ -56,7 +65,10 @@ const AddItem = () => {
           Add a new item
         </h2>
         {/* Form */}
-        <form onSubmit={handleAddNewItem} className="shadow-md shadow-black/30 border-2 w-8/12 rounded-xl p-20 mx-auto bg-white my-14">
+        <form
+          onSubmit={handleAddNewItem}
+          className="shadow-md shadow-black/30 border-2 w-8/12 rounded-xl p-20 mx-auto bg-white my-14"
+        >
           <h3 className="text-xl font-semibold mb-4">Basic Info</h3>
           {/* 1st line */}
           <div className="flex justify-between gap-12">
@@ -179,37 +191,37 @@ const AddItem = () => {
               </label>
             </div>
             <div className="flex flex-col gap-3 flex-1 flex-wrap">
-            <div className="relative w-full rounded-lg flex-1">
-              <input
-                className="peer w-full rounded-full border bg-slate-100 border-slate-300/50 shadow-lg shadow-slate-500/20 bg-transparent px-4 py-2 text-black/80 focus:outline-none"
-                type="text"
-                placeholder=""
-                id="stock"
-                required
-              />
-              <label
-                className="absolute -top-2 left-[10px] rounded-md px-2 text-xs text-black duration-300 peer-placeholder-shown:left-[14px] peer-placeholder-shown:top-3  peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:left-[10px] peer-focus:bg-sky-300 peer-focus:text-xs peer-focus:text-sky-800 dark:peer-focus:text-black font-semibold dark:peer-focus:bg-yellow-500"
-                htmlFor="name"
-              >
-                Stock status
-              </label>
-            </div>
+              <div className="relative w-full rounded-lg flex-1">
+                <input
+                  className="peer w-full rounded-full border bg-slate-100 border-slate-300/50 shadow-lg shadow-slate-500/20 bg-transparent px-4 py-2 text-black/80 focus:outline-none"
+                  type="text"
+                  placeholder=""
+                  id="stock"
+                  required
+                />
+                <label
+                  className="absolute -top-2 left-[10px] rounded-md px-2 text-xs text-black duration-300 peer-placeholder-shown:left-[14px] peer-placeholder-shown:top-3  peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:left-[10px] peer-focus:bg-sky-300 peer-focus:text-xs peer-focus:text-sky-800 dark:peer-focus:text-black font-semibold dark:peer-focus:bg-yellow-500"
+                  htmlFor="name"
+                >
+                  Stock status
+                </label>
+              </div>
               <div className="flex justify-between gap-4 my-4 items-center flex-wrap">
                 <div className="relative w-max rounded-lg flex-1">
-              <input
-                className="peer w-full rounded-full border bg-slate-100 border-slate-300/50 shadow-lg shadow-slate-500/20 bg-transparent px-4 py-2 text-black/80 focus:outline-none"
-                type="text"
-                placeholder=""
-                id="customizable"
-                required
-              />
-              <label
-                className="absolute -top-2 left-[10px] rounded-md px-2 text-xs text-black duration-300 peer-placeholder-shown:left-[14px] peer-placeholder-shown:top-3  peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:left-[10px] peer-focus:bg-sky-300 peer-focus:text-xs peer-focus:text-sky-800 dark:peer-focus:text-black font-semibold dark:peer-focus:bg-yellow-500"
-                htmlFor="customizable"
-              >
-                Is this Customizable?
-              </label>
-            </div>
+                  <input
+                    className="peer w-full rounded-full border bg-slate-100 border-slate-300/50 shadow-lg shadow-slate-500/20 bg-transparent px-4 py-2 text-black/80 focus:outline-none"
+                    type="text"
+                    placeholder=""
+                    id="customizable"
+                    required
+                  />
+                  <label
+                    className="absolute -top-2 left-[10px] rounded-md px-2 text-xs text-black duration-300 peer-placeholder-shown:left-[14px] peer-placeholder-shown:top-3  peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:left-[10px] peer-focus:bg-sky-300 peer-focus:text-xs peer-focus:text-sky-800 dark:peer-focus:text-black font-semibold dark:peer-focus:bg-yellow-500"
+                    htmlFor="customizable"
+                  >
+                    Is this Customizable?
+                  </label>
+                </div>
               </div>
             </div>
           </div>

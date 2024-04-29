@@ -82,6 +82,11 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+
+  // user email 
+  // const addDataCardEmail = email => {
+  // }
+
   // Modal
   // const [openModal, setOpenModal] = useState(false);
   // useEffect(() => {

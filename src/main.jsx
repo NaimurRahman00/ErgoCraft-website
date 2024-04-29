@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home2></Home2>,
-        loader: () => fetch('http://localhost:5000/craft')
+        loader: () => fetch('https://ergocraft.vercel.app/craft')
         // loader: async () => {
         //   const [sliders, data] = await Promise.all([
         //     fetch("/sliders.json"),
@@ -35,15 +35,16 @@ const router = createBrowserRouter([
       {
         path: "/allItems",
         element: <AllItem></AllItem>,
-        loader: () => fetch('http://localhost:5000/craft')
+        loader: () => fetch('https://ergocraft.vercel.app/craft')
       },
       {
         path: "/addItem",
         element: <AddItem></AddItem>,
       },
       {
-        path: "/myList",
+        path: "/myList/",
         element: <MyList></MyList>,
+        loader: () => fetch('https://ergocraft.vercel.app/craft')
       },
       {
         path: "/viewDetais",
