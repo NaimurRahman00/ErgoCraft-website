@@ -12,6 +12,8 @@ import Home2 from "./Page/Home2.jsx";
 import ViewDetails from "./Page/ViewDetails.jsx";
 import NotFound from "./Page/NotFound.jsx";
 import AuthProvider from "./Providers/AuthProvider.jsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoutes.jsx";
+import ViewAnotherCraft from "./Page/ViewAnotherCraft.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,35 +23,50 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home2></Home2>,
-        loader: () => fetch('https://ergocraft.vercel.app/craft')
-        // loader: async () => {
-        //   const [sliders, data] = await Promise.all([
-        //     fetch("/sliders.json"),
-        //     fetch("/data.json"),
-        //   ]);
-        //   const slidersData = await sliders.json();
-        //   const cardData = await data.json();
-
-        //   return { slidersData, cardData };
+        // loader: () => fetch("https://ergocraft.vercel.app/craft"),
+        loader: async () => ({ 
+          crafts: await fetch("https://ergocraft.vercel.app/craft").then(res => res.json()), anotherCrafts: await fetch("http://localhost:5000/anotherCraft").then(res => res.json()) 
+        })
       },
       {
         path: "/allItems",
         element: <AllItem></AllItem>,
-        loader: () => fetch('https://ergocraft.vercel.app/craft')
+        loader: () => fetch("https://ergocraft.vercel.app/craft"),
       },
       {
         path: "/addItem",
-        element: <AddItem></AddItem>,
+        element: (
+          <PrivateRoute>
+            <AddItem></AddItem>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myList/",
-        element: <MyList></MyList>,
-        loader: () => fetch('https://ergocraft.vercel.app/craft')
+        element: (
+          <PrivateRoute>
+            <MyList></MyList>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("https://ergocraft.vercel.app/craft"),
       },
       {
         path: "/viewDetais",
-        element: <ViewDetails></ViewDetails>,
+        element: (
+          <PrivateRoute>
+            <ViewDetails></ViewDetails>
+          </PrivateRoute>
+        ),
       },
+      {
+        path: "/viewAnotherCraft/:id",
+        element: <ViewAnotherCraft></ViewAnotherCraft>,
+        loader: async ({ params }) => {
+          const res = await fetch("http://localhost:5000/anotherCraft");
+          const data = await res.json();
+          return data.filter(cardData => cardData._id === params.id);
+        }
+      }      
     ],
   },
   {

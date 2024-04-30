@@ -3,14 +3,14 @@ import Navbar from "../Componants/Navbar";
 import Footer from "../Componants/Footer";
 import { useContext, useState } from "react";
 import { ContextData } from "../Providers/AuthProvider";
-import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth/cordova";
-import { signInWithPopup } from "firebase/auth";
-import auth from "../Firebase/firebase.init";
+// import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth/cordova";
+// import { signInWithPopup } from "firebase/auth";
+// import auth from "../Firebase/firebase.init";
 import { ToastContainer } from "react-toastify";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useContext(ContextData);
+  const { login, signInWithGoogle, signInWithGithub } = useContext(ContextData);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,11 +22,11 @@ const Login = () => {
   };
 
   // Google auth
-  const googleProvider = new GoogleAuthProvider();
-
+  // const googleProvider = new GoogleAuthProvider();
   const handleGoogleSignIn = () => {
-    signInWithPopup(auth, googleProvider)
-      .then(() => {
+    signInWithGoogle()
+      .then(result => {
+        console.log(result)
         // navigate after login
         navigate(location?.state ? location.state : "/");
       })
@@ -36,10 +36,10 @@ const Login = () => {
   };
 
   //  Github auth
-  const githubProvider = new GithubAuthProvider();
+  // const githubProvider = new GithubAuthProvider();
 
   const handleGithubSignIn = () => {
-    signInWithPopup(auth, githubProvider)
+    signInWithGithub()
       .then(() => {
         // navigate after login
         navigate(location?.state ? location.state : "/");
@@ -60,9 +60,10 @@ const Login = () => {
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
-    console.log(email, password)
+    // console.log(email, password)
 
-    login(email, password)
+    login(email, password, e)
+    navigate(location?.state ? location.state : "/");
       // .then((result) => {
       //   console.log(result);
       //   success("Login successful!");

@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { ContextData } from "../Providers/AuthProvider";
+import { ToastContainer } from "react-toastify";
 
 const AddItem = () => {
-  const { success } = useContext(ContextData);
+  const { success, currentUser } = useContext(ContextData);
+  // console.log(currentUser)
 
   const bgImg = {
     backgroundImage: 'url("/public/register-bg.jpg")',
@@ -24,8 +26,10 @@ const AddItem = () => {
     const description = form.description.value;
     const stock = form.stock.value;
     const customizable = form.customizable.value;
-    const userName = form.user_name.value;
-    const email = form.email.value;
+    const userName = currentUser.displayName;
+    const myEmail = currentUser.email
+    // const userName = form.user_name.value;
+    // const email = form.email.value;
 
     const newData = {
       name,
@@ -38,8 +42,9 @@ const AddItem = () => {
       stock,
       customizable,
       userName,
-      email,
+      myEmail
     };
+    // console.log(newData)
 
     // send data to the server
     fetch("https://ergocraft.vercel.app/craft", {
@@ -49,11 +54,11 @@ const AddItem = () => {
       },
       body: JSON.stringify(newData),
     })
-      .then((res) => {
-        res.json();
-        success("Craft item added successfully!");
-      })
+      .then((res) => res.json())
       .then((data) => {
+        if(data?.insertedId) {
+          success("Craft item added successfully!")
+        }
         console.log(data);
       });
   };
@@ -67,7 +72,7 @@ const AddItem = () => {
         {/* Form */}
         <form
           onSubmit={handleAddNewItem}
-          className="shadow-md shadow-black/30 border-2 w-8/12 rounded-xl p-20 mx-auto bg-white my-14"
+          className="shadow-md shadow-black/30 border-2 w-7/12 rounded-xl p-20 mx-auto bg-white my-14"
         >
           <h3 className="text-xl font-semibold mb-4">Basic Info</h3>
           {/* 1st line */}
@@ -225,9 +230,9 @@ const AddItem = () => {
               </div>
             </div>
           </div>
-          <h3 className="text-xl font-semibold mb-4 mt-10">User Info</h3>
-          {/* 4th line */}
-          <div className="flex justify-between gap-12">
+          {/*  <h3 className="text-xl font-semibold mb-4 mt-10">User Info</h3>
+           4th line
+           <div className="flex justify-between gap-12">
             <div className="relative w-max rounded-lg flex-1">
               <input
                 className="peer w-full rounded-full border bg-slate-100 border-slate-300/50 shadow-lg shadow-slate-500/20 bg-transparent px-4 py-2 text-black/80 focus:outline-none"
@@ -243,7 +248,7 @@ const AddItem = () => {
                 User Name
               </label>
             </div>
-            {/* Sub category name */}
+            {/* Sub category name 
             <div className="relative w-max rounded-lg flex-1">
               <input
                 className="peer w-full rounded-full border bg-slate-100 border-slate-300/50 shadow-lg shadow-slate-500/20 bg-transparent px-4 py-2 text-black/80 focus:outline-none"
@@ -259,7 +264,7 @@ const AddItem = () => {
                 Email
               </label>
             </div>
-          </div>
+          </div> */}
           {/* submit button */}
           <div className="relative rounded-lg w-full mt-8">
             <input
@@ -271,6 +276,7 @@ const AddItem = () => {
           </div>
         </form>
       </div>
+      <ToastContainer className="z-20"></ToastContainer>
     </div>
   );
 };

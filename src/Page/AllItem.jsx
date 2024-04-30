@@ -40,7 +40,7 @@ const AllItem = () => {
                   />
                 </td>
                 <td className="py-4 px-4 border-b text-xl font-medium">
-                  {item.subName}
+                  {item.myEmail || item.email}
                 </td>
                 <td className="py-4 px-4 border-b text-lg font-medium">
                   ${item.price}

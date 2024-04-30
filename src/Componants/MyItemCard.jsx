@@ -1,16 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import  { ContextData } from "../Providers/AuthProvider";
 
-const MyItemCard = ({ cardData, myCard, setMyCard }) => {
+const MyItemCard = ({ cardData, myItem, setMyItem }) => {
   const {success} = useContext(ContextData)
-  const { _id } = cardData;
+  const { _id, name, myEmail} = cardData;
+  // console.log(myItem.filter(i => i.userEmail === userEmail ))
 
   // Delete modal
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   // delete card
   const handleDelete = (id) => {
-    console.log(id);
+    // console.log(id);
     fetch(`https://ergocraft.vercel.app/craft/${id}`, {
       method: "DELETE",
     })
@@ -19,8 +20,8 @@ const MyItemCard = ({ cardData, myCard, setMyCard }) => {
         console.log(data);
         if (data.deletedCount > 0) {
           success("Item deleted succesfully!")
-          const remaining = myCard.filter(card => card._id !== _id);
-          setMyCard(remaining)
+          const remaining = myItem.filter(card => card._id !== _id);
+          setMyItem(remaining)
         }
       });
   };
@@ -51,7 +52,7 @@ const MyItemCard = ({ cardData, myCard, setMyCard }) => {
       stock,
       customizable,
     };
-    console.log(updatedData);
+    // console.log(updatedData);
 
     fetch(`https://ergocraft.vercel.app/craft/${_id}`, {
       method: "PUT",
@@ -102,10 +103,9 @@ const MyItemCard = ({ cardData, myCard, setMyCard }) => {
       <div className="bg-card mx-auto w-full max-w-md rounded-lg bg-white shadow-lg shadow-black/30">
         {/* Product Title */}
         <div className="flex flex-col space-y-1.5 px-6 pt-6">
-          <h3 className="text-2xl font-semibold ">Classic Leather Jacket</h3>
+          <h3 className="text-2xl font-semibold ">{name}</h3>
           <p className="text-sm text-gray-500 dark:text-black/60">
-            Made with genuine leather, our Classic Leather Jacket is the perfect
-            addition to every wardrobe.
+            {myEmail}
           </p>
         </div>
         {/* Category and price */}

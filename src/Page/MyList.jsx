@@ -1,16 +1,31 @@
 import { useLoaderData } from "react-router-dom";
 import MyItemCard from "../Componants/MyItemCard";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ContextData } from "../Providers/AuthProvider";
 
 const MyList = () => {
 const allCard = useLoaderData();
-const [myCard, setMyCard] = useState(allCard)
+const { currentUser } = useContext(ContextData)
+const [myItem, setMyItem] = useState();
+
+console.log(currentUser.email);
+
 
   // const bgImg = {
   //   backgroundImage: 'url("/public/register-bg.jpg")',
   //   backgroundSize: "cover",
   //   backgroundRepeat: "no-repeat",
   // };
+
+  useEffect(()=>{
+    fetch(`http://localhost:5000/craft/${currentUser?.myEmail}`)
+    .then(res => res.json())
+    .then(data => {
+      const filterMydata = data.filter(my => my.myEmail === currentUser.email);
+      setMyItem(filterMydata);
+    })
+  }, [currentUser]);
+
 
   return (
     <div className="relative">
@@ -19,8 +34,8 @@ const [myCard, setMyCard] = useState(allCard)
       </h2>
       <div className="w-10/12 mx-auto max-w-[1440px] py-10">
         <div className="flex gap-10 items-start justify-center flex-wrap">
-          {myCard.map((cardData, idx) => (
-            <MyItemCard key={idx} cardData={cardData} myCard={myCard} setMyCard={setMyCard}></MyItemCard>
+          {myItem?.map((cardData, idx) => (
+            <MyItemCard key={idx} cardData={cardData} myItem={myItem} setMyItem={setMyItem}></MyItemCard>
           ))}
         </div>
       </div>

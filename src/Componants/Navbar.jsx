@@ -8,7 +8,6 @@ import { ContextData } from "../Providers/AuthProvider";
 const Navbar = () => {
   const { currentUser, userPhoto, userName, loading, logOut } =
     useContext(ContextData);
-  console.log(userPhoto, userName);
 
   // Profile
   const [open, setOpen] = useState(false);
@@ -153,14 +152,14 @@ const Navbar = () => {
                               width={60}
                               height={60}
                               className="w-[52px] rounded-full bg-slate-500 object-cover duration-500 hover:scale-x-[98%] hover:opacity-80"
-                              src={currentUser?.photoURL || userPhoto}
+                              src={currentUser?.photoURL}
                               alt="avatar drop down navigate ui"
                             />
                           </button>
                           {/* Hover Text */}
                           <div className="absolute -left-[200px] top-0 flex cursor-pointer whitespace-nowrap opacity-0 duration-500 hover:hidden group-hover:-left-[220px] group-hover:opacity-100">
                             <p className="h-fit rounded-md bg-[#0EA5E9] px-3 py-2 text-white shadow-[0px_0px_10px_0px_#0EA5E9]">
-                              {userName}
+                              {userName || 'Your Name'}
                             </p>
                             <span className="absolute -right-2 top-[50%] h-0 w-0 -translate-y-1/2 rotate-45 border-b-[20px] border-r-[20px] border-b-transparent border-r-[#0EA5E9] shadow-[0px_0px_10px_0px_#0EA5E9]"></span>
                           </div>
@@ -171,27 +170,6 @@ const Navbar = () => {
                           open ? "visible duration-300" : "invisible"
                         } absolute -right-8 top-14 z-50 w-fit text-base rounded-sm bg-slate-200 shadow-md`}
                       >
-                        {/* {items.map((item, idx) => (
-                          <li onClick={item === "Log Out" ? handleLogOut : ""}
-                            key={idx}
-                            className={`rounded-sm px-6 py-2 ${
-                              open ? "opacity-100 duration-300" : "opacity-0"
-                            }  ${
-                              item === "Log Out"
-                                ? "text-red-500 hover:bg-red-600 hover:text-white"
-                                : "hover:bg-slate-300"
-                            }`}
-                          >
-                            {item}
-                          </li>
-                        ))} */}
-                        <li
-                          className={`rounded-sm px-6 w-40 py-2 text-black hover:bg-red-600 hover:text-white ${
-                            open ? "opacity-100 duration-300" : "opacity-0"
-                          }`}
-                        >
-                          Profile
-                        </li>
                         <li 
                         onClick={handleLogOut}
                           className={`rounded-sm px-6 w-40 py-2 text-red-500 hover:bg-red-600 hover:text-white ${
