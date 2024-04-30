@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <Home2></Home2>,
         // loader: () => fetch("https://ergocraft.vercel.app/craft"),
         loader: async () => ({ 
-          crafts: await fetch("https://ergocraft.vercel.app/craft").then(res => res.json()), anotherCrafts: await fetch("http://localhost:5000/anotherCraft").then(res => res.json()) 
+          crafts: await fetch("https://ergocraft.vercel.app/craft").then(res => res.json()), anotherCrafts: await fetch("https://ergocraft.vercel.app/anotherCraft").then(res => res.json()) 
         })
       },
       {
@@ -51,18 +51,23 @@ const router = createBrowserRouter([
         loader: () => fetch("https://ergocraft.vercel.app/craft"),
       },
       {
-        path: "/viewDetais",
+        path: "/viewDetails/:id",
         element: (
           <PrivateRoute>
             <ViewDetails></ViewDetails>
           </PrivateRoute>
         ),
+        loader: async ({ params }) => {
+          const res = await fetch("http://ergocraft.vercel.app/craft");
+          const data = await res.json();
+          return data.filter(cardData => cardData._id === params.id);
+        }
       },
       {
         path: "/viewAnotherCraft/:id",
         element: <ViewAnotherCraft></ViewAnotherCraft>,
         loader: async ({ params }) => {
-          const res = await fetch("http://localhost:5000/anotherCraft");
+          const res = await fetch("https://ergocraft.vercel.app/anotherCraft");
           const data = await res.json();
           return data.filter(cardData => cardData._id === params.id);
         }

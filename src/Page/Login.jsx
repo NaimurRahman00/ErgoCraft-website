@@ -16,7 +16,7 @@ const Login = () => {
 
   // style
   const bgImg = {
-    backgroundImage: 'url("/public/register-bg.jpg")',
+    backgroundImage: 'url("https://i.ibb.co/pwgzst1/register-bg.jpg")',
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   };
@@ -82,7 +82,7 @@ const Login = () => {
           <Navbar></Navbar>
         </div>
         <div className="flex justify-center items-end mt-[5%] z-10">
-          <img className="size-[40em]" src="/login-bg.png" alt="" />
+          <img className="size-[40em]" src="https://i.ibb.co/48djN5g/login-bg.png" alt="" />
           {/* Form side */}
           <div className="w-full p-10 space-y-3 rounded-[2.4rem] bg-white shadow-2xl shadow-black/15 font-sans mx-16 border">
             <h1 className="text-3xl font-bold text-center text-black/85">

@@ -7,7 +7,7 @@ const AddItem = () => {
   // console.log(currentUser)
 
   const bgImg = {
-    backgroundImage: 'url("/public/register-bg.jpg")',
+    backgroundImage: 'url("https://i.ibb.co/pwgzst1/register-bg.jpg")',
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   };

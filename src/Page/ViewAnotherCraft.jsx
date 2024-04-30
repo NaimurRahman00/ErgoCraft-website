@@ -3,7 +3,6 @@ import AnotherCard from "../Componants/AnotherCard";
 
 const ViewAnotherCraft = () => {
     const cards = useLoaderData()
-    console.log(cards)
 
   return (
     <div className="w-11/12 mx-auto max-w-[1440px] ">

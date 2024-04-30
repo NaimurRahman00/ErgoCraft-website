@@ -43,7 +43,7 @@ const Register = () => {
 
   // style
   const bgImg = {
-    backgroundImage: 'url("/public/register-bg.jpg")',
+    backgroundImage: 'url("https://i.ibb.co/pwgzst1/register-bg.jpg")',
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   };
@@ -138,7 +138,7 @@ const Register = () => {
               </Link>
             </p>
           </div>
-          <img className="size-[32rem]" src="/girl.png" alt="" />
+          <img className="size-[32rem]" src="https://i.ibb.co/1R3dP82/girl.png" alt="" />
         </div>
       </div>
       <div className="bg-neutral-100 absolute bottom-0 z-10 right-0 left-0">

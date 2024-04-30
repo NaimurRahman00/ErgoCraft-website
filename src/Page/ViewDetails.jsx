@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 const ViewDetails = () => {
+  const cards = useLoaderData();
+  const card = cards[0];
+  console.log(card);
+
   const [currentSlider, setCurrentSlider] = useState(0);
   const sliders = [
     {
-      img: "https://source.unsplash.com/1200x540/?nature",
+      img: "https://source.unsplash.com/1200x540/?wood-craft",
       title: "Escape 1",
       des: "A Symphony of Tranquility. Experience the perfect blend of relaxation and excitement.",
     },
     {
-      img: "https://source.unsplash.com/1200x540/?hill",
+      img:`https://source.unsplash.com/1200x540/?wood-jute-craft`,
       title: "Escape 2",
       des: "A Symphony of Tranquility. Experience the perfect blend of relaxation and excitement.",
     },
     {
-      img: "https://source.unsplash.com/1200x540/?mountain",
+      img: "https://source.unsplash.com/1200x540/?jute-craft",
       title: "Escape 3",
       des: "A Symphony of Tranquility. Experience the perfect blend of relaxation and excitement.",
     },
@@ -34,6 +39,11 @@ const ViewDetails = () => {
     <div className="">
       {/* card details */}
       <div className="w-11/12 mx-auto max-w-[1440px] py-10 border-t-2">
+        <div>
+          <h2 className="text-[3rem] pb-10 font-medium font-unbounded text-center uppercase">
+            Details
+          </h2>
+        </div>
         <div className="grid grid-cols-12 gap-10 w-10/12 mx-auto">
           <div className="col-span-5">
             <div
@@ -41,14 +51,6 @@ const ViewDetails = () => {
               style={{ backgroundImage: `url(${sliders[currentSlider].img})` }}
             >
               {/* text container here */}
-              <div className="drop-shadow-lg text-white text-center px-5">
-                <h1 className="text-xl lg:text-3xl font-semibold mb-3">
-                  {sliders[currentSlider].title}
-                </h1>
-                <p className="text-sm md:text-base lg:text-lg">
-                  {sliders[currentSlider].des}
-                </p>
-              </div>
             </div>
             {/* slider container */}
             <div className="flex justify-center items-center gap-3 p-2">
@@ -67,25 +69,37 @@ const ViewDetails = () => {
             </div>
           </div>
           <div className="col-span-7 ">
-            <h3>Sub Category Name</h3>
-            <h2>Item Name</h2>
-            <h4>Rating</h4>
-            <p>Short Description</p>
+            <h2 className="text-black/90 text-xl font-bold">{card.name}</h2>
+            <h3>{card.subName}</h3>
+            <p className="py-2 pt-6 text-black/60">{card.description}</p>
             <div>
-              <h2>Processing time</h2>
-              <h4>Customization - Yes/No</h4>
-              <h5>Stock Status</h5>
+              <h5 className="text-lg font-semibold">
+                Stock Status - {card.stock}
+              </h5>
+              <h4 className="text-lg font-semibold">
+                Customization - {card.customizable}
+              </h4>
+            </div>
+            <div className="flex gap-3 justify-start items-start">
+              <h4 className="bg-black text-white w-fit rounded-full mt-5 px-4 py-1">
+                {card.rating}
+              </h4>
+              <h2 className="bg-black text-white w-fit rounded-full mt-5 px-4 py-1">
+                {card.time} days
+              </h2>
             </div>
             <div className="join grid grid-cols-3 w-fit pt-5">
-              <button className="join-item btn btn-outline w-fit">
-                -
-              </button>
+              <button className="join-item btn btn-outline w-fit">-</button>
               <button className="join-item btn btn-outline w-fit">1</button>
               <button className="join-item btn btn-outline w-fit">+</button>
             </div>
             <div className="flex gap-5 py-10">
-            <button className="rounded-lg border-2 border-yellow-500 px-8 py-3 text-xl text-yellow-500 duration-200 hover:bg-yellow-500 hover:text-black">Add to card</button>
-            <button className="rounded-lg bg-yellow-500 border-2 border-yellow-500 px-8 py-3 text-xl text-black duration-200 hover:bg-yellow-500/80 hover:text-black">Buy Now</button>
+              <button className="rounded-lg border-2 border-yellow-500 px-8 py-3 text-xl text-yellow-500 duration-200 hover:bg-yellow-500 hover:text-black">
+                Add to card
+              </button>
+              <button className="rounded-lg bg-yellow-500 border-2 border-yellow-500 px-8 py-3 text-xl text-black duration-200 hover:bg-yellow-500/80 hover:text-black">
+                Buy Now
+              </button>
             </div>
           </div>
         </div>

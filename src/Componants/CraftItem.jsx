@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const pagination = {
   clickable: true,
@@ -20,6 +20,7 @@ const pagination = {
 };
 
 const CraftItem = ({crafts}) => {
+
   const isSmallScreen = window.innerWidth <= 600;
   const isMedScreen = window.innerWidth <= 900;
   const cardData = crafts;
@@ -113,7 +114,7 @@ const CraftItem = ({crafts}) => {
                   </div>
                   <div className="flex gap-4 justify-between items-center">
                     <div className="text-xl font-bold">$ {slide.price}</div>
-                    <Link to="/viewDetais">
+                    <Link to={`/viewDetails/${slide._id}`} >
                       <button className="btm rounded-full border-2 border-yellow-500 text-yellow-500 font-bold px-4 hover:text-slate-800 dark:hover:bg-white  py-2  duration-300 hover:bg-gray-200 mr-5">
                         View Details
                       </button>

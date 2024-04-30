@@ -18,7 +18,7 @@ console.log(currentUser.email);
   // };
 
   useEffect(()=>{
-    fetch(`http://localhost:5000/craft/${currentUser?.myEmail}`)
+    fetch(`https://ergocraft.vercel.app/craft/${currentUser?.myEmail}`)
     .then(res => res.json())
     .then(data => {
       const filterMydata = data.filter(my => my.myEmail === currentUser.email);

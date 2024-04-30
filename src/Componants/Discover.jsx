@@ -30,7 +30,7 @@ const Discover = () => {
             </button>
           </div>
           <div className="max-w-lg absolute right-20 top-10">
-            <img src="/public/girl.png" alt="" />
+            <img src="https://i.ibb.co/1R3dP82/girl.png" alt="" />
           </div>
         </div>
       </div>

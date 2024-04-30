@@ -1,4 +1,4 @@
-import React from "react";
+
 import ArtCraftCard from "./ArtCraftCard";
 import { useLoaderData } from "react-router-dom";
 
