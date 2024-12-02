@@ -4,7 +4,6 @@ import  { ContextData } from "../Providers/AuthProvider";
 const MyItemCard = ({ cardData, myItem, setMyItem }) => {
   const {success} = useContext(ContextData)
   const { _id, name, myEmail} = cardData;
-  // console.log(myItem.filter(i => i.userEmail === userEmail ))
 
   // Delete modal
   const [openDeleteModal, setOpenDeleteModal] = useState(false);

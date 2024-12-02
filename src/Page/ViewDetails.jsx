@@ -3,8 +3,8 @@ import { useLoaderData } from "react-router-dom";
 
 const ViewDetails = () => {
   const cards = useLoaderData();
+  console.log(cards)
   const card = cards[0];
-  console.log(card);
 
   const [currentSlider, setCurrentSlider] = useState(0);
   const sliders = [
